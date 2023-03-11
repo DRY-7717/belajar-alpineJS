@@ -12,7 +12,91 @@
     ></script>
   </head>
   <body>
-    <div x-data="{nama: 'bima'}" x-text="nama"></div>
-    <button x-data="{label: 'click here'}" x-text="label" type="submit" class="text-"></button>
+    <div
+      x-data="{open: false}"
+      class="container bg-slate-700 py-5 h-56 px-5 w-1/2 mt-11 mx-auto rounded-3xl text-center"
+    >
+      <!-- <h1
+        class="text-center text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-violet-400"
+      >
+        Angka <span x-text="angka"></span> adalah bilangan
+        <span x-text="angka % 2 === 0 ? 'Genap' : 'Ganjil'"></span>
+      </h1> -->
+
+      <!-- <h1
+        class="text-center text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-violet-400"
+      >
+        Hi, <span x-html="url"></span>
+      </h1> -->
+
+      <button
+        @click="open = !open"
+        class="text-center px-10 py-3 bg-blue-500 rounded-xl text-white transition duration-300"
+        :class="open ? 'bg-violet-500' : 'bg-blue-500'"
+        x-text="open ? 'Tutup' : 'Buka'"
+        @keyup.slash.window="open = true"
+        @click.outside="open = false"
+      ></button>
+      <div
+        x-show="open"
+        x-transition.duration.300ms
+        class="w-3/4 py-10 bg-slate-400 mt-5 mx-auto rounded-xl text-center text-white"
+      >
+        Lorem ipsum dolor sit
+      </div>
+    </div>
+    <!-- <div
+      x-data="{message: 'yoo bima'}"
+      class="container bg-slate-700 py-11 px-5 w-1/2 mt-11 mx-auto rounded-3xl text-center"
+    >
+      <button
+        class="text-center px-10 py-3 bg-blue-500 rounded-xl text-white transition duration-300"
+      >
+        click here
+      </button>
+    </div> -->
+    <div
+      x-data="{open: false, pesan: '', colors: []}"
+      class="container bg-slate-700 py-11 px-5 w-1/2 mt-11 mx-auto rounded-3xl text-center"
+    >
+      <h1
+        class="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-violet-400"
+      >
+        Hi,<span x-text="pesan"></span>
+      </h1>
+      <!-- once berfungsi untuk berguna untuk melakukan sekali ketik -->
+      <!-- <input
+        type="text"
+        @keyup.debounce.750="console.log($event.target.value)"
+        class="block w-3/4 mt-5 mx-auto rounded-lg h-11 px-5 outline-none border-0"
+      /> -->
+      <input
+        type="text"
+        x-model="pesan"
+        class="block w-3/4 mt-5 mx-auto rounded-lg h-11 px-5 outline-none border-0"
+      />
+      <button
+        @click.stop="alert('button di klik')"
+        class="text-center px-10 py-3 bg-blue-500 rounded-xl text-white transition duration-300 mt-3"
+      >
+        Klik saya lagi
+      </button>
+      <span
+        x-text="pesan.length < 20 ? pesan.length : 'tulisan terlalu panjang'"
+        class="text-white block"
+        :class="pesan.length > 19 ? 'text-red-600' : ''"
+      ></span>
+      <hr />
+
+      <input type="checkbox" id="red" value="red" x-model="colors" />
+      <label for="red" class="block text-white">red</label>
+      <input type="checkbox" id="blue" value="blue" x-model="colors" />
+      <label for="blue" class="block text-white">blue</label>
+      <input type="checkbox" id="green" value="green" x-model="colors" />
+      <label for="green" class="block text-white">green</label>
+
+      <p class="block text-white">Colors: <span x-text="colors.map(h => h.charAt(0).toUpperCase() + h.slice(1)).join(', ')"></span></p>
+      
+    </div>
   </body>
 </html>
